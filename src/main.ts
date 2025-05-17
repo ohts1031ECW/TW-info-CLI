@@ -33,13 +33,16 @@ RL.setPrompt('> ');
 RL.prompt();
 
 
-RL.on('line', (line: string) => {
-  const command:string = line.trim().split(' ')[0];
-  const args:string[] = line.trim().split(' ').slice(1);
+RL.on('line', async (line: string) => {
+  const command: string = line.trim().split(' ')[0];
+  const args: string[] = line.trim().split(' ').slice(1);
 
+
+  RL.pause();
   //読み込んだコマンドを実行実行
   if (CommandList[command] !== undefined) {
-    CommandList[command].callback(args);
+    await CommandList[command].callback(args);
   }
+  RL.resume();
   RL.prompt();
 });
