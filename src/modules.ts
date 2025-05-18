@@ -18,6 +18,19 @@ function isTwitterUrl(url: string): boolean {
     return false;
   }
 }
+
+//timestampをYYYY/MM/DD HH:mm:ss形式に変換
+function formatTimestamp(timestamp: number): string {
+  const date = new Date(timestamp * 1000); // 秒からミリ秒に変換
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
+}
 export {
-    isTwitterUrl
+    isTwitterUrl,
+    formatTimestamp
 }
